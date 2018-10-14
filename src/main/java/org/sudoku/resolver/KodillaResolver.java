@@ -2,14 +2,11 @@ package org.sudoku.resolver;
 
 //findAny findFirst roznice
 
-
-
-import com.kodilla.sudoku.*;
+import lombok.extern.log4j.Log4j;
 import org.sudoku.Board;
 import org.sudoku.Field;
 import org.sudoku.Resolver;
 import org.sudoku.filler.Filler;
-import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class KodillaResolver implements Resolver {

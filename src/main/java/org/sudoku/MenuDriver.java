@@ -1,20 +1,13 @@
 package org.sudoku;
 
-import org.sudoku.filler.UserFiller;
 import lombok.AllArgsConstructor;
-
-//wydielenie jako service
-// readme.md
-// osobny modul
-
-
 
 @AllArgsConstructor
 class MenuDriver {
 
-    private UserFiller boardUserFiller;
+    GameService gameService;
 
-    void startGame() {
+    void runGame() {
         Commander.showWelcome();
         while (true) {
             makeChoice();
@@ -34,31 +27,12 @@ class MenuDriver {
     }
 
     private void startSudoku() {
-        boardUserFiller.getBoard().resetBoard();
-        while (true) {
-            String entry = Commander.getUserEntry();
-            if (entry.equals(Commander.getSolutionCommand())) {
-                resolveSudoku(selectResolver());
-                break;
-            } else if (Validator.checkUserEntry(entry)) {
-                boardUserFiller.fillSingleField(entry);
-                System.out.println(boardUserFiller.getBoard().toString());
-            }
-        }
+        gameService.runThroughBoard();
     }
 
     private void exitSudoku() {
         Commander.showExit();
         System.exit(0);
-    }
-
-    private void resolveSudoku(Resolver resolver) {
-        Commander.getFinalSolution();
-        Commander.showFinalValidation(resolver.resolve());
-    }
-
-    private Resolver selectResolver() {
-        return Commander.getResolver(boardUserFiller.getBoard());
     }
 }
 

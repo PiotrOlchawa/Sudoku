@@ -172,7 +172,7 @@ public class Validator {
 
     static boolean checkUserEntry(String entry) {
         char[] fieldChar = entry.toCharArray();
-        if (!Validator.validateNumber(fieldChar)) {
+        if (!validateNumber(fieldChar)) {
             Commander.badNumber();
             return false;
         }

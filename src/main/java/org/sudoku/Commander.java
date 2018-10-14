@@ -113,4 +113,8 @@ public class Commander {
     private static void askForResolver() {
         System.out.println(RESOLVER);
     }
+
+    public static void showBoardAfterEntry(Board board) {
+        System.out.println(board);
+    }
 }
