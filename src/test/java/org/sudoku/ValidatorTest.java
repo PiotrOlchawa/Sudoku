@@ -2,12 +2,11 @@ package org.sudoku;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
-
-
 
 /*                  Correct Board Sample To Test
                 1    2    3    4    5    6    7    8    9
@@ -23,14 +22,13 @@ import java.util.stream.IntStream;
             9   9  | -1 | -1 | -1 | -1 | -1 | -1 | -1 | -1 |
 */
 
-
 public class ValidatorTest {
 
-    @Test
-    public void validate() throws CloneNotSupportedException {
-        // Given
-        Board validBoard = new Board();
-        Validator validator = new Validator();
+    private static final Board validBoard = new Board();
+
+
+    @BeforeClass
+    public static void boardSetup(){
         // Row Values
         validBoard.getFields()[0][0].setValue(2);
         validBoard.getFields()[0][1].setValue(8);
@@ -55,6 +53,12 @@ public class ValidatorTest {
         validBoard.getFields()[1][2].setValue(4);
         validBoard.getFields()[2][1].setValue(1);
         validBoard.getFields()[2][2].setValue(9);
+    }
+
+    @Test
+    public void validate() throws CloneNotSupportedException {
+        // Given
+        Validator validator = new Validator();
         Board invalidBoard = validBoard.deepCopy();
         // Set invalid Row
         invalidBoard.getFields()[1][1].setValue(9);
@@ -85,8 +89,19 @@ public class ValidatorTest {
 
 
     @Test
-    public void validateNewEntry() {
-
+    public void validateNewEntry() throws CloneNotSupportedException {
+        // Given
+        Board boardCorrect = validBoard.deepCopy();
+        Board boardIncorrect = validBoard.deepCopy();
+        // Add correct value
+        boardCorrect.getFields()[4][7].setValue(1);
+        boardIncorrect.getFields()[4][7].setValue(3);
+        // When
+        boolean boardCorrectCopyValidation = Validator.validateNewEntry(4,7,boardCorrect);
+        boolean boardIncorrectCopyValidation = Validator.validateNewEntry(4,7,boardIncorrect);
+        // Then
+        Assert.assertTrue(boardCorrectCopyValidation);
+        Assert.assertFalse(boardIncorrectCopyValidation);
     }
 
     @Test
@@ -108,9 +123,9 @@ public class ValidatorTest {
     @Test
     public void checkUserEntry() {
         // Given
-        String correctEntry = "123";
-        String incorrectEntry1 = "1WWw";
-        String incorrectEntry2 = "12W";
+        String correctEntry = "143";
+        String incorrectEntry1 = "1WWwgfdsf";
+        String incorrectEntry2 = "12";
         // When
         boolean isCorrectEntry = Validator.checkUserEntry(correctEntry);
         boolean isIncorrectEntry1 = Validator.checkUserEntry(incorrectEntry1);
