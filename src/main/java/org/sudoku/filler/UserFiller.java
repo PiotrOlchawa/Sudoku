@@ -32,12 +32,12 @@ public class UserFiller {
         }
     }
 
-    private static int[] getField(String entry) {
+    private int[] getField(String entry) {
         char[] fieldChar = entry.toCharArray();
         return convertCharArrayToIntArray(fieldChar);
     }
 
-    private static int[] convertCharArrayToIntArray(char[] fieldChar) {
+    private int[] convertCharArrayToIntArray(char[] fieldChar) {
         int[] fieldInt = new int[fieldChar.length];
         for (int i = 0; i < fieldChar.length; i++) {
             fieldInt[i] = Integer.parseInt(String.valueOf(fieldChar[i]));

@@ -87,7 +87,6 @@ public class ValidatorTest {
         Assert.assertNotEquals(45, invalidSectionSum);
     }
 
-
     @Test
     public void validateNewEntry() throws CloneNotSupportedException {
         // Given

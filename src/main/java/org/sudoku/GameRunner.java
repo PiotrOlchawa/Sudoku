@@ -6,9 +6,6 @@ import org.apache.log4j.BasicConfigurator;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-
-
 public class GameRunner {
 
     // readme.md

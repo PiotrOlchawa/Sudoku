@@ -12,5 +12,4 @@ public class Adress {
     private String city;
     private String street;
 
-
 }

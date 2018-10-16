@@ -18,9 +18,6 @@ public class KodillaResolver implements Resolver {
         this.board = board;
     }
 
-
-    // suma el kolumna i wiersz
-
     @Override
     public Board resolve() {
         log.debug("Starting KodilaResolver");

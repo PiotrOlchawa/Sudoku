@@ -22,7 +22,7 @@ public class Field {
     Field(int coordinatex, int coordinatey) {
         this.coordinatex = coordinatex;
         this.coordinatey = coordinatey;
-        defaultAvailableValueList();
+        setDefaultAvailableValueList();
     }
 
     public boolean checkAvailiableValue(int value) {
@@ -39,10 +39,10 @@ public class Field {
 
     void resetAvailableValueList() {
         availableValueList.clear();
-        defaultAvailableValueList();
+        setDefaultAvailableValueList();
     }
 
-    private void defaultAvailableValueList() {
+    private void setDefaultAvailableValueList() {
         Integer[] valueList = new Integer[MAX_VALUE];
         for (int i = 0; i < MAX_VALUE; i++) {
             valueList[i] = i + 1;

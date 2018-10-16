@@ -5,10 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static org.junit.Assert.*;
 
 @Log4j
 public class BoardTest {
@@ -16,7 +12,6 @@ public class BoardTest {
     @Test
     public void deepCopy() throws CloneNotSupportedException {
         // Given
-        Board boardDeepCopy;
         Board board = new Board();
         int fieldValue1 = 1;
         int fieldValue2 = 1;
@@ -34,9 +29,16 @@ public class BoardTest {
         board.getFields()[coordinatex2][coordinatey2].setCoordinatey(coordinatey2);
 
         // When
-        boardDeepCopy = board.deepCopy();
+        Board boardDeepCopy = board.deepCopy();
+        int sumAllElementsboardDeepCopy = Arrays.stream(boardDeepCopy.getFields())
+                .flatMap(l-> Arrays.stream(l))
+                .map(l->l.getValue())
+                .reduce(0, Integer::sum);
+        int sumAllElementsboard = Arrays.stream(board.getFields())
+                .flatMap(l-> Arrays.stream(l))
+                .map(l->l.getValue())
+                .reduce(0, Integer::sum);
         board.getFields()[5][5].setValue(5);
-
         // Then
         Assert.assertEquals(1, boardDeepCopy.getFields()[coordinatex1][coordinatey1].getValue());
         Assert.assertEquals(1, boardDeepCopy.getFields()[coordinatex2][coordinatey2].getValue());
@@ -45,6 +47,7 @@ public class BoardTest {
         Assert.assertEquals(-1, boardDeepCopy.getFields()[2][2].getValue());
         Assert.assertNotEquals(5, boardDeepCopy.getFields()[5][5].getValue());
         Assert.assertEquals(-1, boardDeepCopy.getFields()[5][5].getValue());
+        Assert.assertEquals(sumAllElementsboard,sumAllElementsboardDeepCopy);
     }
 
     @Test

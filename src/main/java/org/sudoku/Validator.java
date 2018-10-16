@@ -98,7 +98,7 @@ public class Validator {
         return true;
     }
 
-    boolean validate(Board board) {
+    public boolean validate(Board board) {
         this.board = board;
         return validateRow() && validateColumn() && validateSection();
     }
