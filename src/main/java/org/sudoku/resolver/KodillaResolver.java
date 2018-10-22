@@ -1,7 +1,5 @@
 package org.sudoku.resolver;
 
-//findAny findFirst roznice
-
 import lombok.extern.log4j.Log4j;
 import org.sudoku.Board;
 import org.sudoku.Field;

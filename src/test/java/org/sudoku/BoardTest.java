@@ -31,12 +31,12 @@ public class BoardTest {
         // When
         Board boardDeepCopy = board.deepCopy();
         int sumAllElementsboardDeepCopy = Arrays.stream(boardDeepCopy.getFields())
-                .flatMap(l-> Arrays.stream(l))
-                .map(l->l.getValue())
+                .flatMap(Arrays::stream)
+                .map(Field::getValue)
                 .reduce(0, Integer::sum);
         int sumAllElementsboard = Arrays.stream(board.getFields())
-                .flatMap(l-> Arrays.stream(l))
-                .map(l->l.getValue())
+                .flatMap(Arrays::stream)
+                .map(Field::getValue)
                 .reduce(0, Integer::sum);
         board.getFields()[5][5].setValue(5);
         // Then
@@ -60,7 +60,7 @@ public class BoardTest {
 
         boolean defaulSizeAvaliableValueList = Arrays.stream(board.getFields())
                 .flatMap(Arrays::stream)
-                .map(l -> l.getAvailableValueList())
+                .map(Field::getAvailableValueList)
                 .allMatch(l -> l.size() == 9);
         boolean defaultValue = Arrays.stream(board.getFields())
                 .flatMap(Arrays::stream)
